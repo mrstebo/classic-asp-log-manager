@@ -1,5 +1,5 @@
 <%
-Class DetailedLogObject
+Class LogObject
 	Public LogLevel
 	Public Message
 	Public Tags
