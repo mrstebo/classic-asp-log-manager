@@ -20,9 +20,11 @@ Class LogManager_
     Set pLoggers = Nothing
   End Sub
 
-  Private Function FindOrCreateLogger(logger)
-    Dim loggerName : loggerName = logger.Name
+  Public Function GetLogger(loggerName)
+    Set GetLogger = FindOrCreateLogger(loggerName, (New NullLogger)(loggerName))
+  End Function
 
+  Private Function FindOrCreateLogger(loggerName, loggerFactory)
     If pLoggers.Exists(loggerName) Then
       If pLoggers(loggerName) Is Nothing Then
         pLoggers.Remove(loggerName)
@@ -30,10 +32,10 @@ Class LogManager_
     End If
 
     If Not pLoggers.Exists(loggerName) Then
-      Call pLoggers.Add(loggerName, logger)
+      Call pLoggers.Add(loggerName, loggerFactory)
     End If
 
-    Set AppendLogger = pLoggers(loggerName)
+    Set FindOrCreateLogger = pLoggers(loggerName)
   End Function
 End Class
 
