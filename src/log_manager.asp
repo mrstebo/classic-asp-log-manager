@@ -24,6 +24,10 @@ Class LogManager_
     Set GetLogger = FindOrCreateLogger(loggerName, (New NullLogger)(loggerName))
   End Function
 
+  Public Function GetFileLogger(loggerName, filename)
+    Set GetFileLogger = FindOrCreateLogger(loggerName, (New FileLogger)(loggerName, filename))
+  End Function
+
   Private Function FindOrCreateLogger(loggerName, loggerFactory)
     If pLoggers.Exists(loggerName) Then
       If pLoggers(loggerName) Is Nothing Then
